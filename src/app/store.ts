@@ -1,9 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-
+import mathFormReducer from "../features/math/mathFormSlice"
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    math: mathFormReducer,
   },
 });
 
@@ -15,3 +14,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+
