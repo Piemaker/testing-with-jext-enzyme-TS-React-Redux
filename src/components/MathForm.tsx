@@ -3,36 +3,34 @@ import { Form, Button, Dropdown, DropdownButton, Col, Row, ButtonGroup, Containe
 import { getValue, getMessage, add, sub, mul, div } from '../features/math/mathFormSlice';
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 export default function MathForm() {
-    const [operation,setOperation] = useState("");
-    const [input1,setInput1] = useState<number>(0);
-    const [input2, setInput2] = useState<number>(0);
-    const value = useAppSelector(getValue);
-    const message = useAppSelector(getMessage);
-    const dispatch = useAppDispatch();
-    
-    const handleSubmit = (e)=>{
-      e.preventDefault();
-      if(input1 !== null && input2 !==null && operation !== null){
+  const [operation, setOperation] = useState("");
+  const [input1, setInput1] = useState<number>(0);
+  const [input2, setInput2] = useState<number>(0);
+  const value = useAppSelector(getValue);
+  const message = useAppSelector(getMessage);
+  const dispatch = useAppDispatch();
 
-        const payload = {in1 : input1, in2: input2};
-        // dispatch action
-        switch (operation) {
-          case "Add":
-            dispatch(add(payload));
-            break;
-          case "Sub":
-            dispatch(sub(payload));
-            break;
-          case "Mul":
-            dispatch(mul(payload));
-            break;
-          case "Div":
-            dispatch(div(payload));
-            break;
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (input1 !== null && input2 !== null && operation !== null) {
+      const payload = { in1: input1, in2: input2 };
+      // dispatch action
+      switch (operation) {
+        case "Add":
+          dispatch(add(payload));
+          break;
+        case "Sub":
+          dispatch(sub(payload));
+          break;
+        case "Mul":
+          dispatch(mul(payload));
+          break;
+        case "Div":
+          dispatch(div(payload));
+          break;
       }
-      
     }
+  };
   return (
     <Container>
       <Row>
@@ -51,7 +49,7 @@ export default function MathForm() {
                 First Number of Operation
               </Form.Text>
             </Form.Group>
-            <Form.Group as={Col} sm="4" className="align-self-center" required>
+            <Form.Group as={Col} sm="4" className="d-flex justify-content-center align-items-center" required>
               <DropdownButton
                 onSelect={(e) => setOperation(e)}
                 id="operation"
@@ -92,7 +90,7 @@ export default function MathForm() {
               </ButtonGroup>
             </Col>
             <Row>
-              <Col sm="6" className="m-auto mt-5 mb-5">
+              <Col sm="6" className="m-auto mt-5 mb-5 text-center">
                 <p>{message}</p>
                 <h2>{value}</h2>
               </Col>

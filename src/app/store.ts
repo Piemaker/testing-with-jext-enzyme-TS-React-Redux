@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import mathFormReducer from "../features/math/mathFormSlice"
+import personReducer from '../features/person/personReducer';
 export const store = configureStore({
   reducer: {
     math: mathFormReducer,
+    person: personReducer
   },
 });
 
