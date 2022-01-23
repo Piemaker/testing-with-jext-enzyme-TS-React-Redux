@@ -24,7 +24,7 @@ export  const Person: React.FC <Props> = ({email,gender,name,picture}) => {
           />
           <h2 className="display-5 font-weight-bold">{name}</h2>
           <p className="font-weight-light display-6">{gender}</p>
-          <p className='display-6'>{email}</p>
+          <p className = "display-6" style={{fontSize : "1.5rem", overflowWrap : "break-word"}}>{email}</p>
         </Col>
       </Row>
     </Container>
