@@ -6,6 +6,10 @@ import { shallow, mount } from "enzyme";
 import Header from "./components/Header";
 import MathForm from "./components/MathForm";
 import { Provider } from "react-redux";
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+
+configure({ adapter: new Adapter() });
 
 // test('renders learn react link', () => {
 //   const { getByText } = render(
@@ -25,8 +29,17 @@ describe("<Header />", () => {
   });
 });
 
+
 // this requires to be wrapped in a provider in order to function
 // can't get it to work because of dependency on store
+
+// describe("<App />", () => {
+//   const wrapper = shallow(<App />);
+
+//   test("Check random user header contains valid text", () => {
+//     expect(wrapper.find("h2").text()).toContain("Get Random User");
+//   });
+// });
 
 // describe("<MathFrom />", () => {
 //   const wrapper = shallow(<MathForm/>);

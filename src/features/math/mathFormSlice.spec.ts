@@ -31,6 +31,14 @@ describe("mathForm reducer", () => {
     });
   });
 
+  it("should handle subtraction with -ve values", () => {
+    const actual = mathFormReducer(initialState, sub({ in1: 1, in2: -2 }));
+    expect(actual).toEqual({
+      value: 3,
+      message: "1 - -2 = 3",
+    });
+  });
+
   it("should handle multiplication", () => {
     const actual = mathFormReducer(
       initialState,
@@ -50,6 +58,14 @@ describe("mathForm reducer", () => {
   });
   it("should handle dividing by zero", () => {
     const actual = mathFormReducer(initialState, div({ in1: 1, in2: 0 }));
+    expect(actual).toEqual({
+      value: 0,
+      message: "Can't divide by zero!",
+    });
+  });
+
+  it("should handle dividing zero by zero", () => {
+    const actual = mathFormReducer(initialState, div({ in1: 0, in2: 0 }));
     expect(actual).toEqual({
       value: 0,
       message: "Can't divide by zero!",
