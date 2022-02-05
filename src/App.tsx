@@ -2,7 +2,7 @@
 import './App.css';
 import { Container,Row, Col, Button, Spinner } from 'react-bootstrap';
 import Header from './components/Header';
-import MathForm from './components/MathForm';
+import MathForm from './components/Mathform/MathForm';
 import {Person} from './components/Person';
 import { getPersons, fetchPerson , getStatus} from "../src/features/person/personReducer"
 import { useAppDispatch, useAppSelector } from "../src/app/hooks";

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Form, Button, Dropdown, DropdownButton, Col, Row, ButtonGroup, Container} from 'react-bootstrap';
-import { getValue, getMessage, add, sub, mul, div } from '../features/math/mathFormSlice';
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { getValue, getMessage, add, sub, mul, div } from '../../features/math/mathFormSlice';
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 export default function MathForm() {
   const [operation, setOperation] = useState("");
   const [input1, setInput1] = useState<number>(0);
@@ -52,14 +52,14 @@ export default function MathForm() {
             <Form.Group as={Col} sm="4" className="d-flex justify-content-center align-items-center" required>
               <DropdownButton
                 onSelect={(e) => setOperation(e)}
-                id="operation"
+                  id="operation"
                 title="Operation"
               >
-                <Dropdown.ItemText>Choose Operation</Dropdown.ItemText>
-                <Dropdown.Item eventKey="Add">Add</Dropdown.Item>
-                <Dropdown.Item eventKey="Sub">Sub</Dropdown.Item>
-                <Dropdown.Item eventKey="Mul">Mul</Dropdown.Item>
-                <Dropdown.Item eventKey="Div">Div</Dropdown.Item>
+                <Dropdown.ItemText data-testId = "options">Choose Operation</Dropdown.ItemText>
+                <Dropdown.Item data-testId = "options-add" eventKey="Add">Add</Dropdown.Item>
+                <Dropdown.Item data-testId = "options-sub" eventKey="Sub">Sub</Dropdown.Item>
+                <Dropdown.Item data-testId = "options-mul" eventKey="Mul">Mul</Dropdown.Item>
+                <Dropdown.Item data-testId = "options-div" eventKey="Div">Div</Dropdown.Item>
               </DropdownButton>
               <Form.Label className="mt-1">{operation}</Form.Label>
             </Form.Group>
@@ -92,7 +92,7 @@ export default function MathForm() {
             <Row>
               <Col sm="6" className="m-auto mt-5 mb-5 text-center">
                 <p>{message}</p>
-                <h2>{value}</h2>
+                <h2 data-testId = "output">{value}</h2>
               </Col>
             </Row>
           </Form>
