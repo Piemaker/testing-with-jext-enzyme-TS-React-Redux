@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { store } from "./app/store";
 import App from "./App";
 import { shallow } from "enzyme";
@@ -27,12 +27,65 @@ describe("<Header />", () => {
 // this requires to be wrapped in a provider in order to function
 
 describe("<App />", () => {
+  // ! IMPLEMENTATION WITH FETCH SPY
+  const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          results: [
+            {
+              name: { first: "Omar", last: "Sayed" },
+              picture: {
+                large: "./test-img-large.jpg",
+              },
+              gender: "male",
+              email: "brad.gibson@example.com",
+            },
+          ],
+        }),
+    })
+  );
+  // ! IMPLEMENTATION WIH MANUAL FETCH MOCKING 
+  //  const originalFetch = global.fetch;
+  // beforeAll(()=>{
+  //   // Mock fetch
+  //   global.fetch = jest.fn(() =>
+  //     Promise.resolve({
+  //       json: () =>
+  //         Promise.resolve({
+  //           results: [
+  //             {
+  //               name: { first: "Omar", last: "Sayed" },
+  //               picture: {
+  //                 large: "./test-img-large.jpg",
+  //               },
+  //               gender: "male",
+  //               email: "brad.gibson@example.com",
+  //             },
+  //           ],
+  //         }),
+  //     })
+  //   );
+  // })
+  // afterAll(()=>{
+  //   global.fetch = originalFetch;
+  // })
   // const wrapper = shallow(<MockApp />);
-  test("Check random user header contains valid text", () => {
+  beforeEach(() => {
     render(<MockApp />);
+  });
+  test("Check random user header contains valid text", () => {
     expect(
       screen.getByRole("heading", { name: /get random user/i })
     ).toBeInTheDocument();
   });
+  test("When user clicks on get user it should display a single user", async () => {
+    let getUserButton = screen.getByRole("button", {
+      name: /get user/i,
+    });
+    fireEvent.click(getUserButton);
+    expect(fetchMock).toHaveBeenCalled();
+    let userEmail = await screen.findByText(/brad.gibson@example.com/i);
+    expect(userEmail).toBeInTheDocument();
+  });
 });
-

@@ -6,6 +6,7 @@ import MathForm from './components/Mathform/MathForm';
 import {Person} from './components/Person';
 import { getPersons, fetchPerson , getStatus} from "../src/features/person/personReducer"
 import { useAppDispatch, useAppSelector } from "../src/app/hooks";
+
 function App() {
     const dispatch = useAppDispatch();
     const personsData = useAppSelector(getPersons);
