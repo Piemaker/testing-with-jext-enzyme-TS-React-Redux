@@ -55,11 +55,11 @@ export default function MathForm() {
                   id="operation"
                 title="Operation"
               >
-                <Dropdown.ItemText data-testId = "options">Choose Operation</Dropdown.ItemText>
-                <Dropdown.Item data-testId = "options-add" eventKey="Add">Add</Dropdown.Item>
-                <Dropdown.Item data-testId = "options-sub" eventKey="Sub">Sub</Dropdown.Item>
-                <Dropdown.Item data-testId = "options-mul" eventKey="Mul">Mul</Dropdown.Item>
-                <Dropdown.Item data-testId = "options-div" eventKey="Div">Div</Dropdown.Item>
+                <Dropdown.ItemText data-testid = "options">Choose Operation</Dropdown.ItemText>
+                <Dropdown.Item data-testid = "options-add" eventKey="Add">Add</Dropdown.Item>
+                <Dropdown.Item data-testid = "options-sub" eventKey="Sub">Sub</Dropdown.Item>
+                <Dropdown.Item data-testid = "options-mul" eventKey="Mul">Mul</Dropdown.Item>
+                <Dropdown.Item data-testid = "options-div" eventKey="Div">Div</Dropdown.Item>
               </DropdownButton>
               <Form.Label className="mt-1">{operation}</Form.Label>
             </Form.Group>
@@ -92,7 +92,7 @@ export default function MathForm() {
             <Row>
               <Col sm="6" className="m-auto mt-5 mb-5 text-center">
                 <p>{message}</p>
-                <h2 data-testId = "output">{value}</h2>
+                <h2 data-testid = "output">{value}</h2>
               </Col>
             </Row>
           </Form>

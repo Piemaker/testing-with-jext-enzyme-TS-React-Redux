@@ -6,6 +6,10 @@ import Header from "./components/Header";
 import { Provider } from "react-redux";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+// * jest-fetch-mock
+import fetchMock from "jest-fetch-mock";
+
+fetchMock.enableMocks();
 
 configure({ adapter: new Adapter() });
 
@@ -28,24 +32,24 @@ describe("<Header />", () => {
 
 describe("<App />", () => {
   // ! IMPLEMENTATION WITH FETCH SPY
-  const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
-    Promise.resolve({
-      json: () =>
-        Promise.resolve({
-          results: [
-            {
-              name: { first: "Omar", last: "Sayed" },
-              picture: {
-                large: "./test-img-large.jpg",
-              },
-              gender: "male",
-              email: "brad.gibson@example.com",
-            },
-          ],
-        }),
-    })
-  );
-  // ! IMPLEMENTATION WIH MANUAL FETCH MOCKING 
+  // const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
+  //   Promise.resolve({
+  //     json: () =>
+  //       Promise.resolve({
+  //         results: [
+  //           {
+  //             name: { first: "Omar", last: "Sayed" },
+  //             picture: {
+  //               large: "./test-img-large.jpg",
+  //             },
+  //             gender: "male",
+  //             email: "brad.gibson@example.com",
+  //           },
+  //         ],
+  //       }),
+  //   })
+  // );
+  // ! IMPLEMENTATION WIH MANUAL FETCH MOCKING
   //  const originalFetch = global.fetch;
   // beforeAll(()=>{
   //   // Mock fetch
@@ -73,6 +77,8 @@ describe("<App />", () => {
   // const wrapper = shallow(<MockApp />);
   beforeEach(() => {
     render(<MockApp />);
+    //* jest-fetch-mock
+    // fetch.resetMocks();
   });
   test("Check random user header contains valid text", () => {
     expect(
@@ -84,7 +90,36 @@ describe("<App />", () => {
       name: /get user/i,
     });
     fireEvent.click(getUserButton);
-    expect(fetchMock).toHaveBeenCalled();
+    fetch.mockResponseOnce(
+      JSON.stringify({
+        results: [
+          {
+            name: { first: "Omar", last: "Sayed" },
+            picture: {
+              large: "./test-img-large.jpg",
+            },
+            gender: "male",
+            email: "brad.gibson@example.com",
+          },
+        ],
+      })
+    );
+    // expect(fetchMock).toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalledTimes(1);
+
+    // expect(fetch).toHaveBeenCalledWith("")
+    expect(fetch).toHaveReturnedWith({
+      results: [
+        {
+          name: { first: "Omar", last: "Sayed" },
+          picture: {
+            large: "./test-img-large.jpg",
+          },
+          gender: "male",
+          email: "brad.gibson@example.com",
+        },
+      ],
+    });
     let userEmail = await screen.findByText(/brad.gibson@example.com/i);
     expect(userEmail).toBeInTheDocument();
   });

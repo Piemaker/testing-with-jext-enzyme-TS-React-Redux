@@ -24,7 +24,7 @@ const initialState: PersonState = {
   async () => {
     const response = await fetch(url);
     // The value we return becomes the `fulfilled` action payload
-    const person = response.json();
+    const person = await response.json();
     return person;
   }
 );
