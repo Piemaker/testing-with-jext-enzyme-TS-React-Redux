@@ -89,7 +89,6 @@ describe("<App />", () => {
     let getUserButton = screen.getByRole("button", {
       name: /get user/i,
     });
-    fireEvent.click(getUserButton);
     fetch.mockResponseOnce(
       JSON.stringify({
         results: [
@@ -104,22 +103,25 @@ describe("<App />", () => {
         ],
       })
     );
+
+    fireEvent.click(getUserButton);
+
     // expect(fetchMock).toHaveBeenCalled();
     expect(fetch).toHaveBeenCalledTimes(1);
 
     // expect(fetch).toHaveBeenCalledWith("")
-    expect(fetch).toHaveReturnedWith({
-      results: [
-        {
-          name: { first: "Omar", last: "Sayed" },
-          picture: {
-            large: "./test-img-large.jpg",
-          },
-          gender: "male",
-          email: "brad.gibson@example.com",
-        },
-      ],
-    });
+    // expect(fetch).toHaveReturnedWith({
+    //   results: [
+    //     {
+    //       name: { first: "Omar", last: "Sayed" },
+    //       picture: {
+    //         large: "./test-img-large.jpg",
+    //       },
+    //       gender: "male",
+    //       email: "brad.gibson@example.com",
+    //     },
+    //   ],
+    // });
     let userEmail = await screen.findByText(/brad.gibson@example.com/i);
     expect(userEmail).toBeInTheDocument();
   });

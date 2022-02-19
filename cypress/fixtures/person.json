@@ -1,0 +1,13 @@
+
+{
+  "results": [
+    {
+      "name": { "first": "Omar", "last": "Sayed" },
+      "picture": {
+        "large": "../src/test-img-large.jpg"
+      },
+      "gender": "male",
+      "email": "brad.gibson@example.com"
+    }
+  ]
+}
